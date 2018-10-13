@@ -1,5 +1,6 @@
 package caeser;
-
+import java.util.*;
+import java.util.Scanner;
 
 
 public class Caeser {
@@ -7,7 +8,7 @@ public class Caeser {
 
 
 	public static String encrypt(String plainText, int shift){
-
+		
 		if(shift>26){
 
 			shift = shift%26;
@@ -26,7 +27,7 @@ public class Caeser {
 
 		for(int i=0;i<length; i++) {
 
-			char ch=plainText.charAt(i);
+			char ch=Character.toLowerCase(plainText.charAt(i));
 
 			if(Character.isLetter(ch)){
 
@@ -34,9 +35,9 @@ public class Caeser {
 
 					char c= (char)(ch+shift);
 
-					if(c<'a'){
+					if(c>'z'){
 
-						cipherText +=(char)(ch + (26+shift));
+						cipherText +=(char)((ch-26) + shift);
 
 					}
 
@@ -76,6 +77,21 @@ public class Caeser {
 
 	}
 
+	public static String encrypt2(String cipherText, char[]key) {
+		
+		char[] ch = cipherText.toCharArray();
+		
+		for(int i=0;i<ch.length;i++) {
+			for(int j=0;j<key.length;j++) {
+			if(ch[i] == key[j]) {
+				ch[i] = key[j+1];
+			}
+			cipherText+=ch[i];
+		}
+		}
+		
+		return cipherText;
+	}
 
 
 		// TODO Auto-generated method stub
@@ -88,12 +104,22 @@ public class Caeser {
 
 public static void main(String[] args) {
 
-	String text=" this is some message";
+	String text="ABZ";
 
-	String cipher =encrypt(text, 5);
+	String cipher =encrypt(text, 3);
 
 	System.out.println(cipher);
+	
+	Scanner reader = new Scanner(System.in);
+	System.out.println("Enter number of Substitution key: /n");
+	
+	
+	
+	String key2 = reader.nextLine();
+	char[] key = new char[key2.length()];
+	key=key2.toCharArray();
 
+	System.out.println(encrypt2(cipher,key));
 }
 
 }
