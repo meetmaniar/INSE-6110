@@ -1,0 +1,66 @@
+package cryptosolver;
+public class cryptosolver {
+
+ public static void main(String[] args){
+
+  double[] freq = {146,7,36,59,134,33,20,54,119,24,4,63,31,109,102,34,1,49,95,103,35,26,16,2,10,0};
+  String cryptogram = "QYUY (BKFCKNWBYK: QYGY) BW YK BWTYKF CS BKFCKNWBY. GBOX Y VCVJTYOBCK CS 135 HBTTBCK (NDZTJFBKP OXN 3.6 HBTTBCK BK OXN BWTYKF CS HYFJIY GXBZX BW YFHBKBWONINF YW VYIO CS OXN VICUBKZNW CS QYUY), QYUY BW OXN GCITF'W HCWO VCVJTCJW BWTYKF, YKF CKN CS OXN HCWO FNKWNTA-VCVJTYONF VTYZNW CK OXN PTCLN. QYUY BW OXN XCHN CS 60 VNIZNKO CS OXN BKFCKNWBYK VCVJTYOBCK. OXN BKFCKNWBYK ZYVBOYT ZBOA, QYEYIOY, BW TCZYONF CK GNWONIK QYUY. HJZX CS BKFCKNWBYK XBWOCIA OCCE VTYZN CK QYUY. BO GYW OXN ZNKONI CS VCGNISJT XBKFJ-LJFFXBWO NHVBINW, OXN BWTYHBZ WJTOYKYONW, YKF OXN ZCIN CS OXN ZCTCKBYT FJOZX NYWO BKFBNW. QYUY GYW YTWC OXN ZNKONI CS OXN BKFCKNWBYK WOIJPPTN SCI BKFNVNKFNKZN FJIBKP OXN 1930W YKF 40W. QYUY GYW YTWC CZZJVBNF LA OXN BHVNIBYT QYVYKNWN YIHA SICH 1942 OXICJPX OXN FNSNYO CS OXN QYVYKNWN NHVBIN BK 1945, YKF OXBW VJO Y ONHVCIYIA NKF OC YTT OXCJPXOW CSBKFNVNKFNKZN. QYUY FCHBKYONW BKFCKNWBY'W WCZBYT, VCTBOBZYT, YKF NZCKCHBZ TBSN. SCIHNF HCWOTA YW OXN INWJTO CS UCTZYKBZ NIJVOBCKW, QYUY BW OXN 13OX TYIPNWO BWTYKF BK OXN GCITF YKF OXN SBSOX TYIPNWO BWTYKF BK BKFCKNWBY. Y ZXYBK CS UCTZYKBZ HCJKOYBKW SCIHW YK NYWO-GNWO WVBKN YTCKP OXN BWTYKF. BO XYW OXINN HYBK TYKPJYPNW, OXCJPX QYUYKNWN BW FCHBKYKO, YKF BO BW OXN KYOBUN TYKPJYPN CS YLCJO 60 HBTTBCK VNCVTN BK BKFCKNWBY, HCWO CS GXCH TBUN CK QYUY. HCWO CO BOW INWBFNKOW YIN LBTBKPJYT, GBOX BKFCKNWBYK YW OXNBI SBIWO CI WNZCKF TYKPJYPNW. GXBTN OXN HYQCIBOA CS OXN VNCVTN CS QYUY YIN HJWTBH, QYUY XYW MJBON Y FBUNIWN HBDOJIN CS INTBPBCJW LNTBNSW, NOXKBZBOBNW, YKF ZJTOJINW. QYUY BW FBUBFNF BKOC SCJI VICUBKZNW, GNWO QYUY, ZNKOIYT QYUY, NYWO QYUY, YKF LYKONK, YKF YTWC OGC WVNZBYT FBWOIBZOW, QYEYIOY YKF ACPAYEYIOY.";
+ 
+  //This array will be useful later
+  char[] letters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+  
+  //Turn the cryptogram sting into and array of chars
+  char[] charCrypt = cryptogram.toCharArray();
+  
+  //This holds a count of the frequencies in the cryptogram
+  double[] cryptCount = new double[26];
+  
+  //Holds the correct original letter in the position in the array of the letter it replaced
+  char[] mapping = new char[26];
+  
+  //Count the frequencies in the cryptogram
+  for(char c : charCrypt){
+   for(int i = 0; i< letters.length; i++){
+    if(c == letters[i]){
+     cryptCount[i]++;
+    }
+   }
+  }
+  
+  //Now find which letters correspond to which
+  //For each entry in the freq array
+  for(int j = 0; j < freq.length; j++){
+   //check each entry in the charCount array
+   for(int k = 0; k < cryptCount.length; k++){
+    //When the frequencies match they are the same letter
+    if(freq[j] == cryptCount[k]){
+     //Put the original letter in the position in the array of the letter it was replaced by
+     mapping[k] = letters[j];
+    }
+   }
+  }
+  
+  
+  //Now replace the letters
+  for(int charInd = 0; charInd<charCrypt.length; charInd++){
+   //Stays false until the letter has been replaced
+   boolean replaced = false;
+   int letter = 0;
+   //Find and make the replacement.  Make sure not to axceed the bound of the array if you're looking at a number
+   while(!replaced && letter < 26){
+    //If you've found the correct replacement, make it.
+    if(charCrypt[charInd] == letters[letter]){
+     charCrypt[charInd] = mapping[letter];
+     replaced = true;
+    }
+    //If not, increment letter to try the next letter.
+    else{
+     letter++;
+    }
+   }
+  }
+  
+  
+  System.out.println(new String(charCrypt));
+ } 
+}
