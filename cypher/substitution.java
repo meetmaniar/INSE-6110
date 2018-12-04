@@ -14,11 +14,10 @@ import static java.util.stream.Collectors.*;
 import static java.util.Map.Entry.*;
 
 
-
 public class substitution {
-	   final static String key = "abcdefghijklmnoprqstuvwxyz";
+	   final static String key = "QWERTYUIOPASDFGHJKLZXCVBNM";
 	
-	 	  
+	 	  // Encryption
 	    static String encrypt(String s) {
 	        StringBuilder sb = new StringBuilder(s.length());
 	 
@@ -27,7 +26,10 @@ public class substitution {
 	 
 	        return sb.toString();
 	    }
-	 
+	
+	    
+	    //Decryption
+	    
 	    static String decrypt(String s) {
 	        StringBuilder sb = new StringBuilder(s.length());
 	 
@@ -37,51 +39,54 @@ public class substitution {
 	        return sb.toString();
 	    }
 	    
+	    
+	   
+	    
+	    //*Decryption
+	    
 	    static String decypher(String str) {
-	    	/*int[] count = new int[255];
-	    	int[] COUNT = new int[str.length()];
-	    	HashMap<Character,Double>charCount = new HashMap<Character,Double>();
+	    	int[] count1 = new int[255];
+	    	int[] COUNT1 = new int[str.length()];
+	    	HashMap<Character,Double>charCount1= new HashMap<Character,Double>();
 	   	 
-	    	int length = str.length();
+	    	int length1 = str.length();
 
-	    	for (int i = 0; i < length; i++) {
-	    		count[str.charAt(i)]++;
+	    	for (int i = 0; i < length1; i++) {
+	    		count1[str.charAt(i)]++;
 	    	}
 
-	    	char[] ch = new char[str.length()];
-	    	for (int i = 0; i < length; i++) {
-	    		ch[i] = str.charAt(i);
+	    	char[] ch1 = new char[str.length()];
+	    	for (int i = 0; i < length1; i++) {
+	    		ch1[i] = str.charAt(i);
 	    		int find = 0;
 	    		for (int j = 0; j <= i; j++) {
-	    			if (str.charAt(i) == ch[j])
+	    			if (str.charAt(i) == ch1[j])
 	    				find++;
 	    		}
 
 	    		if (find == 1) {
-	    			System.out.println("Number of Occurrence of " + str.charAt(i) + " letter is:" + count[str.charAt(i)]);
+	    			System.out.println("Number of Occurrence of " + str.charAt(i) + " letter is:" + count1[str.charAt(i)]);
 	    			
-	    			COUNT[i]=count[str.charAt(i)];
+	    			COUNT1[i]=count1[str.charAt(i)];
 	    			
 	    		}
 	    		
 	    		
 	    	}
 	    	
-	    	for(int s=0;s<COUNT.length;s++) {
+	    	for(int s=0;s<COUNT1.length;s++) {
 	    		
-	    		charCount.put(str.charAt(s), (double) count[str.charAt(s)]*100/str.length());
+	    		charCount1.put(str.charAt(s), (double) count1[str.charAt(s)]*100/str.length());
 	    	}
 	    	
-	    	System.out.println(charCount);
+	    	System.out.println(charCount1);
 	    
-	    	HashMap<Double,Character> stats = new HashMap<Double,Character>();
-	    	stats.put(12.7, 'e');
-	    	stats.put(8.167,'a');
 	    	
-			return str;*/
 	    	
-	    	final char[] frequencyTable = new char[] {'e','t','a','o','i','n','s','h','r','d','l','c','u','m','w','f','g','y','p','b','v','k','j','x','q','z'};
-	    	final char[] alphabet = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+
+	    	
+	    	final char[] frequencyTable = new char[] {'E','T','A','O','I','N','S','H','R','W','D','L','Y','K','C','U','M','F','G','P','B','V','J','X','Q','Z'};
+	    	final char[] alphabet = new char[] {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 	    	int[] count = new int[255];
 	    	int[] COUNT = new int[str.length()];
 	    	Double quality = (double) 0;
@@ -102,6 +107,7 @@ public class substitution {
 	    			if (str.charAt(i) == ch[j])
 	    				find++;
 	    		}
+	    		
 	    		if (find == 1) {
 	    			COUNT[i]=count[str.charAt(i)];	
 	    		}	
@@ -130,13 +136,13 @@ public class substitution {
 	    	for(char e: key.keySet()) {
 	    		T+=key.get(e);
 	    	}
+	    	
 	    	StringBuilder sb = new StringBuilder(str.length());
 	        for (char c : str.toCharArray()) {
 	            sb.append((char) (T.indexOf((int) c) + 65));
 	        }
-	        T="key: "+T+" ("+String.format("%.2f", quality)+"%)\ntext: "+sb.toString();
+	        T="key:"+T+"("+String.format("%.2f", quality)+"%)\ntext: "+sb.toString();
 			return T;
 	    }
 	    
 }
-
