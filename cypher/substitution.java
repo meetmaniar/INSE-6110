@@ -28,7 +28,7 @@ public class substitution {
 	    }
 	
 	    
-	    //Decryption
+	    //Decryption with the key
 	    
 	    static String decrypt(String s) {
 	        StringBuilder sb = new StringBuilder(s.length());
@@ -42,51 +42,12 @@ public class substitution {
 	    
 	   
 	    
-	    //*Decryption
+	    // Decryption without the key
 	    
 	    static String decypher(String str) {
-	    	int[] count1 = new int[255];
-	    	int[] COUNT1 = new int[str.length()];
-	    	HashMap<Character,Double>charCount1= new HashMap<Character,Double>();
-	   	 
-	    	int length1 = str.length();
-
-	    	for (int i = 0; i < length1; i++) {
-	    		count1[str.charAt(i)]++;
-	    	}
-
-	    	char[] ch1 = new char[str.length()];
-	    	for (int i = 0; i < length1; i++) {
-	    		ch1[i] = str.charAt(i);
-	    		int find = 0;
-	    		for (int j = 0; j <= i; j++) {
-	    			if (str.charAt(i) == ch1[j])
-	    				find++;
-	    		}
-
-	    		if (find == 1) {
-	    			System.out.println("Number of Occurrence of " + str.charAt(i) + " letter is:" + count1[str.charAt(i)]);
-	    			
-	    			COUNT1[i]=count1[str.charAt(i)];
-	    			
-	    		}
-	    		
-	    		
-	    	}
-	    	
-	    	for(int s=0;s<COUNT1.length;s++) {
-	    		
-	    		charCount1.put(str.charAt(s), (double) count1[str.charAt(s)]*100/str.length());
-	    	}
-	    	
-	    	System.out.println(charCount1);
-	    
-	    	
-	    	
-
-	    	
-	    	final char[] frequencyTable = new char[] {'E','T','A','O','I','N','S','H','R','W','D','L','Y','K','C','U','M','F','G','P','B','V','J','X','Q','Z'};
-	    	final char[] alphabet = new char[] {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+	    	 	
+	    	final char[] frequencyTable = new char[] {'E','T','A','O','I','N','S','H','R','W','D','L','Y','K','C','U','M','F','G','P','B','V','J','X','Q','Z'}; //Using this array as conventional hierarchy of the priority based on frequency. 
+	    	final char[] alphabet = new char[] {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'}; //Using this array to append the characters with the matching frequency. 
 	    	int[] count = new int[255];
 	    	int[] COUNT = new int[str.length()];
 	    	Double quality = (double) 0;
@@ -109,12 +70,14 @@ public class substitution {
 	    		}
 	    		
 	    		if (find == 1) {
+	    			System.out.println("Number of Occurrence of " + str.charAt(i) + " letter is:" + count[str.charAt(i)]);
 	    			COUNT[i]=count[str.charAt(i)];	
 	    		}	
 	    	}
 	    	for(int s=0;s<COUNT.length;s++) {
-	    		charFrequency.put(str.charAt(s), (double) count[str.charAt(s)]/str.length());
+	    		charFrequency.put(str.charAt(s), (double) count[str.charAt(s)]/str.length()*100);
 	    	}
+	    	System.out.println(charFrequency);
 	    	HashMap<Character, Double> charFrequencySorted = new HashMap<Character, Double>(); 
 	    	charFrequencySorted = (HashMap<Character, Double>)charFrequency.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue())).collect(toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2)-> e2,LinkedHashMap::new));
 	    	
