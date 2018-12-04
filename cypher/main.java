@@ -35,20 +35,17 @@ public class main {
 		
 
 	
-	System.out.println(substitution.key);
-	System.out.println(substitution.decrypt(substitution.key));
-	
 
-	
+	System.out.println("Enter String:");
 	Scanner reader = new Scanner(System.in);
 	
-	System.out.println("Enter String:");
-	System.out.println(substitution.encrypt("PICKUPATCIRCULATIONDESK"));
-	String str = "arrc";
-	char[] ipchar = str.toCharArray();
+	String str = reader.nextLine();
+
+	
 	System.out.println(substitution.decypher(str));
 
 	}
 
 	
 }
+
